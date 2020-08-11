@@ -1,0 +1,21 @@
+#指定服务端口号
+server:
+  port: 8761
+#指定服务名
+spring:
+  application:
+    name: eureka-server
+eureka:
+  instance:
+    #指定eureka server默认接受心跳的最大时间 默认是90s
+    lease-expiration-duration-in-seconds: 120
+    #指定客户端多久向eureka server发送一次心跳 默认是30s
+    lease-renewal-interval-in-seconds: 40
+  client:
+    service-url:
+      #注册中心通信地址
+      defaultZone: http://localhost:8761/eureka
+    #取消自己向注册中心注册
+    register-with-eureka: false
+    #取消 从 eureka 服务端获取注册表信息
+    fetch-registry: false
