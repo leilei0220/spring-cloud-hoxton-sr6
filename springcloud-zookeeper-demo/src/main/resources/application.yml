@@ -2,11 +2,11 @@ server:
   port: 9001
 spring:
   application:
-    # ×Ô¶¨ÒåµÄÒ»¸öÎ¢·şÎñ·şÎñÃû
+    # è‡ªå®šä¹‰çš„ä¸€ä¸ªå¾®æœåŠ¡æœåŠ¡å
     name: zookeeper-client-demo
   cloud:
     zookeeper:
-      # zookeeper Á¬½ÓµØÖ·  ip£º¶Ë¿Ú
+      # zookeeper è¿æ¥åœ°å€  ipï¼šç«¯å£
       connect-string: xxx:2181
       discovery:
         enabled: true
