@@ -1,14 +1,14 @@
 server:
-  port: 9001 #端口
+  port: 9002 #端口
 spring:
   application:
-    #服务名称
-    name: service-product
+    #服务名称  库存服务
+    name: service-stock
   ###开始配置consul的服务注册
   cloud:
     consul:
       #consul服务器的主机地址 默认:localhost
-      host: 192.168.124.17
+      host: localhost
       #consul服务器的ip地址 默认:8500
       port: 8500
       discovery:
