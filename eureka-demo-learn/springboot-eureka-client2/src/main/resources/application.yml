@@ -1,0 +1,18 @@
+server:
+  port: 8763
+spring:
+  application:
+    #\u670D\u52A1\u540D  \u6CE8\u518C\u670D\u52A1
+    name: register-lei
+eureka:
+  instance:
+    # \u6307\u5B9A\u6B64\u5B9E\u4F8B\u7684ip
+    ip-address: 192.168.124.17
+    #\u663E\u793AIp \u6CE8\u518C
+    prefer-ip-address: true
+    # \u6CE8\u518C\u65F6\u4F7F\u7528ip\u800C\u4E0D\u662F\u4E3B\u673A\u540D
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+  client:
+    service-url:
+      #eureka\u6CE8\u518C\u4E2D\u5FC3\u5730\u5740
+      defaultZone: http://localhost:8761/eureka

@@ -3,7 +3,7 @@ server:
 spring:
   application:
     #服务名  每个不同业务微服务名需唯一
-    name: zs-app
+    name: user-lei
 eureka:
   instance:
     # 指定此实例的ip
