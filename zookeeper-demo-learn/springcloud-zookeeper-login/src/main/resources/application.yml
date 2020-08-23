@@ -1,0 +1,14 @@
+server:
+  port: 9002
+spring:
+  application:
+    # \u81EA\u5B9A\u4E49\u7684\u4E00\u4E2A\u5FAE\u670D\u52A1\u670D\u52A1\u540D
+    name: app-login
+  cloud:
+    zookeeper:
+      # zookeeper \u8FDE\u63A5\u5730\u5740  ip\uFF1A\u7AEF\u53E3
+      connect-string: localhost:2181
+      discovery:
+        enabled: true
+        register: true
+

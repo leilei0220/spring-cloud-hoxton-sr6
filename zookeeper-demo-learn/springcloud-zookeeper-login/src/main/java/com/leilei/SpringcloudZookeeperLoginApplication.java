@@ -1,4 +1,4 @@
-package com.leilei.springcloudzookeeperdemo;
+package com.leilei;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class SpringcloudZookeeperDemoApplication {
+public class SpringcloudZookeeperLoginApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringcloudZookeeperDemoApplication.class, args);
+        SpringApplication.run(SpringcloudZookeeperLoginApplication.class, args);
     }
 
 }

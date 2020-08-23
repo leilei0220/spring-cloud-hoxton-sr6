@@ -3,11 +3,11 @@ server:
 spring:
   application:
     # 自定义的一个微服务服务名
-    name: zookeeper-client-demo
+    name: app-user
   cloud:
     zookeeper:
       # zookeeper 连接地址  ip：端口
-      connect-string: xxx:2181
+      connect-string: localhost:2181
       discovery:
         enabled: true
         register: true
