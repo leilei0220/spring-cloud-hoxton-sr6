@@ -1,5 +1,5 @@
 server:
-  port: 9002 #端口
+  port: 9003 #端口
 spring:
   application:
     #服务名称
@@ -15,7 +15,7 @@ spring:
         #是否需要注册
         register: true
         #注册的实例ID (唯一标志)
-        instance-id: ${spring.application.name}-1
+        instance-id: ${spring.application.name}-2
         #服务的名称
         service-name: ${spring.application.name}
         #当前服务的请求端口

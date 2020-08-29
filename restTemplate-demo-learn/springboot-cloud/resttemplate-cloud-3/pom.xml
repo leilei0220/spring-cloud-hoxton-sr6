@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.leilei</groupId>
-    <artifactId>resttemplate-cloud-2</artifactId>
+    <artifactId>resttemplate-cloud-3</artifactId>
     <version>1.0</version>
-    <name>resttemplate-cloud-2</name>
-    <description>restTemplate 微服务2</description>
+    <name>resttemplate-cloud-3</name>
+    <description>restTemplate 微服务3</description>
 
     <properties>
         <java.version>1.8</java.version>
