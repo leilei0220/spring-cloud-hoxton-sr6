@@ -26,7 +26,8 @@ public class ProductController {
     private String ip;
 
     @RequestMapping("/demo/{id}")
-    public Result getProduct(HttpServletRequest request, @PathVariable("id") Integer id) {
+    public Result getProduct(HttpServletRequest request, @PathVariable("id") Integer id) throws InterruptedException {
+        Thread.sleep(4000L);
         Map<String, String> map = new LinkedHashMap<>();
         Enumeration<String> enumeration = request.getHeaderNames();
         while (enumeration.hasMoreElements()) {

@@ -31,4 +31,7 @@ public class Result {
     public static Result failure() {
         return Result.builder().code(-1).message("请求失败").build();
     }
+    public static Result failure(String message) {
+        return Result.builder().code(-1).message(message).build();
+    }
 }

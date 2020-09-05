@@ -28,7 +28,9 @@ public class Result {
     public static Result success(String message,Object data) {
         return Result.builder().message(message).data(data).code(200).build();
     }
-
+    public static Result failure(String message) {
+        return Result.builder().code(-1).message(message).build();
+    }
     public static Result failure() {
         return Result.builder().code(-1).message("请求失败").build();
     }

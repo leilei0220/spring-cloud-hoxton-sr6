@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
  * @date 2020/8/30 18:30
  * @desc
  */
-@FeignClient(value = "demo-product")
+@FeignClient(value = "demo-product",fallback = ProductFeignFallback.class)
 public interface ProductFeign {
 
     @GetMapping("/product/demo/{id}")

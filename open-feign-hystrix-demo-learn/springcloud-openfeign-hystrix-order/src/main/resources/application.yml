@@ -35,14 +35,34 @@ feign:
     config:
       #demo-product 服务超时时间设置
       demo-product:
+        #显示调用日志
+        loggerLevel: full
         #连接超时时间
         connectTimeout: 5000
         #读取超时时间
         readTimeout: 5000
       #全部服务提供者超时时间设置
       default:
+        #显示调用日志
+        loggerLevel: full
         #连接超时时间
         connectTimeout: 3000
         #读取超时时间
         readTimeout: 3000
+  hystrix:
+    #feign开启hystrix支持
+    enabled: true
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000 #断路器超时时间，默认1000ms
+          strategy: SEMAPHORE
+logging:
+  level:
+    com.leilei.demo: debug
 
