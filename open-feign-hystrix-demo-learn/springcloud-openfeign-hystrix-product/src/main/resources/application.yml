@@ -23,4 +23,4 @@ spring:
         #指定开启ip地址注册
         prefer-ip-address: true
         #当前服务所在 ip ${spring.cloud.client.ip-address}
-        ip-address: 192.168.24.12
+        ip-address: 192.168.124.17

@@ -23,7 +23,7 @@ spring:
         #指定开启ip地址注册
         prefer-ip-address: true
         #当前服务所在 ip ${spring.cloud.client.ip-address}
-        ip-address: 192.168.24.12
+        ip-address: 192.168.124.17
 
 #对demo-product 服务设置负载均衡策略为随机
 demo-product:
@@ -31,6 +31,8 @@ demo-product:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #配置规则 随机
 
 feign:
+  httpclient:
+    enabled: true
   client:
     config:
       #demo-product 服务超时时间设置
