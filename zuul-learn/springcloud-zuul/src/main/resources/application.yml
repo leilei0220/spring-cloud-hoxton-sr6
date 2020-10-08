@@ -1,67 +1,65 @@
 server:
-  port: 7001 #\u7AEF\u53E3
+  port: 7001 #端口
 zuul:
-  sensitive-headers:
   host:
-    connect-timeout-millis: 15000 #HTTP\u8FDE\u63A5\u8D85\u65F6\u5927\u4E8EHystrix\u7684\u8D85\u65F6\u65F6\u95F4
-    socket-timeout-millis: 60000  #socket\u8D85\u65F6
+    connect-timeout-millis: 15000 #HTTP连接超时大于Hystrix的超时时间
+    socket-timeout-millis: 60000  #socket超时
   ignoredServices: '*'
   prefix: /leilei
   routes:
-    #\u8DEF\u7531\u914D\u7F6E\u89C4\u5219\u540D \u53EF\u591A\u4E2A\uFF0C\u4F46\u914D\u7F6E\u6587\u4EF6\u4E2D\u4E0D\u53EF\u91CD\u590D,\u6B64\u540D\u79F0\u53EF\u4EE5\u81EA\u5B9A\u4E49
+    #路由配置规则名 可多个，但配置文件中不可重复,此名称可以自定义
     demo-url:
-      #\u6620\u5C04\u7684url
+      #映射的url
       path: /demo/**
-      #\u8DEF\u7531\u8F6C\u53D1\u7684url \u5373\u8DEF\u7531\u89C4\u5219\u89E6\u53D1\u65F6 zuul \u5E2E\u6211\u4EEC\u7684\u8BF7\u6C42\u8F6C\u53D1\u5230\u4F55url
+      #路由转发的url 即路由规则触发时 zuul 帮我们的请求转发到何url
       url: http://localhost:8081/
-
-    #order\u670D\u52A1\u8DEF\u7531\u914D\u7F6E
+    #order服务路由配置
     order-route:
-      #\u6620\u5C04\u7684url
+      #映射的url
       path: /order/**
-      #\u8DEF\u7531\u8F6C\u53D1\u7684\u670D\u52A1\u540D
+      #路由转发的服务名
       service-id: demo-order
       stripPrefix: false
-    #product\u670D\u52A1\u8DEF\u7531\u914D\u7F6E\u65B9\u5F0F1
+    #product服务路由配置方式1
     product-route:
       path: /pro/**
       service-id: demo-product
-    #product\u670D\u52A1\u8DEF\u7531\u914D\u7F6E\u65B9\u5F0F2
+    #product服务路由配置方式2
     demo-product: /zsls/**
-  #\u5FFD\u7565\u5177\u4F53url\u8DEF\u7531
-#  ignored-patterns: /**/find/product/{id}/**
+  #忽略具体url路由
+  ignored-patterns: /**/find/product/{id}/**
 spring:
   application:
-    #\u670D\u52A1\u540D\u79F0
+    #服务名称
     name: zuul-gateway
-  ###\u5F00\u59CB\u914D\u7F6Econsul\u7684\u670D\u52A1\u6CE8\u518C
+  #开始配置consul的服务注册
   cloud:
     consul:
-      #consul\u670D\u52A1\u5668\u7684\u4E3B\u673A\u5730\u5740 \u9ED8\u8BA4:localhost
+      #consul服务器的主机地址 默认:localhost
       host: localhost
-      #consul\u670D\u52A1\u5668\u7684ip\u5730\u5740 \u9ED8\u8BA4:8500
+      #consul服务器的ip地址 默认:8500
       port: 8500
       discovery:
-        #\u662F\u5426\u9700\u8981\u6CE8\u518C
+        #是否需要注册
         register: true
-        #\u6CE8\u518C\u7684\u5B9E\u4F8BID (\u552F\u4E00\u6807\u5FD7)
+        #注册的实例ID (唯一标志)
         instance-id: ${spring.application.name}-1
-        #\u670D\u52A1\u7684\u540D\u79F0
+        #服务的名称
         service-name: ${spring.application.name}
-        #\u5F53\u524D\u670D\u52A1\u7684\u8BF7\u6C42\u7AEF\u53E3
+        #当前服务的请求端口
         port: ${server.port}
-        #\u6307\u5B9A\u5F00\u542Fip\u5730\u5740\u6CE8\u518C
+        #指定开启ip地址注册
         prefer-ip-address: true
-        #\u5F53\u524D\u670D\u52A1\u6240\u5728 ip ${spring.cloud.client.ip-address}
+        #当前服务所在 ip ${spring.cloud.client.ip-address}
         ip-address: 192.168.124.17
 logging:
   level:
     com.leilei: debug
 ribbon:
-  # \u8FDE\u63A5\u8D85\u65F6\u65F6\u95F4(ms)
-  ConnectTimeout: 10000
-  # \u8BFB\u53D6\u8D85\u65F6\u65F6\u95F4(ms)
-  ReadTimeout: 10000
+  # 连接超时时间(ms)
+  ConnectTimeout: 20000
+  # 读取超时时间(ms)
+  ReadTimeout: 20000
 
 hystrix:
   command:
@@ -69,18 +67,13 @@ hystrix:
       execution:
         timeout:
           enabled: true
-          #\u547D\u4EE4\u7684\u6267\u884C\u8D85\u65F6\u65F6\u95F4  \u8D85\u65F6\u5C06\u6267\u884C\u56DE\u9000
-        isolation:
-#          strategy: SEMAPHORE
+        isolation: #命令的执行超时时间  超时将执行回退
           thread:
-            timeoutInMilliseconds: 7000
+            timeoutInMilliseconds: 10000
+# 仅在测试默认路由设置时使用了，后续不用可移除该配置
 management:
   endpoints:
     web:
       exposure:
-        # *\u5219\u66B4\u9732\u6240\u6709\u7AEF\u70B9
+        # *则暴露所有端点
         include: '*'
-
-
-
-
