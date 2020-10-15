@@ -22,7 +22,10 @@ public class OrderController {
     public OrderController(ProductFeign productFeign) {
         this.productFeign = productFeign;
     }
-
+    @GetMapping("/demo")
+    public Result findProduct() {
+        return Result.success("test---你成功调用到了order服务.");
+    }
     @GetMapping("/find/product/{id}")
     public Result findProduct(@PathVariable("id") Integer id) {
         return productFeign.findProduct(id);

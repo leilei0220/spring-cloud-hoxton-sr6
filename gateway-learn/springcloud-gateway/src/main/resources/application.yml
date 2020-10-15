@@ -16,7 +16,18 @@ spring:
         - id: server-product
           uri: lb://demo-product
           predicates:
-            - Path=/product/**,/zs/{aa}
+#            - Path=/product/**,/zs/{aa}
+#            - After=2020-10-13T21:57:33.993+08:00[Asia/Shanghai]
+#            - Before=2020-10-13T22:12:33.993+08:00[Asia/Shanghai]
+#            - Between=2020-10-13T22:24:33.993+08:00[Asia/Shanghai],2020-10-13T22:26:33.993+08:00[Asia/Shanghai]
+#            - Cookie=username,^[a-zA-z].*
+#            - Method=GET,POST
+#            - Header=Authentication,leilei
+#            - Header=Authentication,\d+
+#            - Weight=testWeight, 1
+#            - Query=name,AA.
+#            - Host=**.zsls.org,**.anotherhost.org
+            - RemoteAddr=192.168.124.1/32
       #\u542F\u7528DiscoveryClient\u7F51\u5173\u96C6\u6210\u7684\u6807\u5FD7,\u5982\u679C\u670D\u52A1\u540D\u8DEF\u7531\u65E0\u6548\u65F6\uFF0C\u53EF\u8BBE\u7F6E\u540E\u518D\u6B21\u5C1D\u8BD5
 #      discovery:
 #        locator:
