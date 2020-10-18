@@ -13,6 +13,10 @@ spring:
           predicates:
             - Path=/order/**
         #根据服务名路由
+        - id: server-order
+            uri: lb://demo-order
+            predicates:
+              - Path=/order/**
         - id: server-product
           uri: lb://demo-product
           predicates:
@@ -31,14 +35,14 @@ spring:
           filters:
 #            - AddRequestHeader=X-Request-lei,man
 #            - AddRequestParameter=name,basketball
-            - AddResponseHeader=x-response,lei1
-            - AddResponseHeader=x-response,lei1
-            - AddResponseHeader=x-response,lei2
-            - AddResponseHeader=x-response,lei2
-            - AddResponseHeader=x-response,lei3
-            - AddResponseHeader=x-response,lei3
-            - AddResponseHeader=x-response,lei3
-            - DedupeResponseHeader=x-response,RETAIN_FIRST
+#            - AddResponseHeader=x-response,lei1
+#            - AddResponseHeader=x-response,lei1
+#            - AddResponseHeader=x-response,lei2
+#            - AddResponseHeader=x-response,lei2
+#            - AddResponseHeader=x-response,lei3
+#            - AddResponseHeader=x-response,lei3
+#            - AddResponseHeader=x-response,lei3
+#            - DedupeResponseHeader=x-response,RETAIN_FIRST
       #如配置服务名路由无效时，可放开此配置
 #      discovery:
 #        locator:
