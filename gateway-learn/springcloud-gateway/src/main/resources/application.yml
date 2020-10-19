@@ -6,6 +6,9 @@ spring:
     name: app-gateway
   cloud:
     gateway:
+      default-filters:
+        - AddResponseHeader=X-Response-Default, panghu
+        - PrefixPath=/lei-app
       routes:
         #简单的路由
         - id: easy-order
@@ -14,9 +17,9 @@ spring:
             - Path=/order/**
         #根据服务名路由
         - id: server-order
-            uri: lb://demo-order
-            predicates:
-              - Path=/order/**
+          uri: lb://demo-order
+          predicates:
+            - Path=/order/**
         - id: server-product
           uri: lb://demo-product
           predicates:
@@ -43,7 +46,17 @@ spring:
 #            - AddResponseHeader=x-response,lei3
 #            - AddResponseHeader=x-response,lei3
 #            - DedupeResponseHeader=x-response,RETAIN_FIRST
+#            - MapRequestHeader=test-header, Authorization
+#            - PrefixPath=/lei
+            - StripPrefix=1
+#            - SetRequestHeader=X-Request-lei, gold
+#            - SetRequestHeader=X-Request-lei, zsls
+#            - SetStatus=401
+#            - RemoveRequestHeader=X-Request-lei
+#            - RemoveRequestParameter=name
+#            - RemoveResponseHeader=x-response
       #如配置服务名路由无效时，可放开此配置
+
 #      discovery:
 #        locator:
 #          enabled: true

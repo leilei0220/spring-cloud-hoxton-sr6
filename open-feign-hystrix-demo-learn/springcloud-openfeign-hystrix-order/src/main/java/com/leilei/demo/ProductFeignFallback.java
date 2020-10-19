@@ -27,4 +27,7 @@ public class ProductFeignFallback implements ProductFeign {
     public Result editProduct(Product product) { return Result.failure(); }
     @Override
     public Result deleteProduct(Integer id) { return Result.failure(); }
+
+    @Override
+    public Result findProductByName(String name) { return Result.failure(); }
 }

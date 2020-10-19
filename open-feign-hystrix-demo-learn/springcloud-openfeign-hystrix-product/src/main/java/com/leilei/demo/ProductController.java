@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Random;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 /**
  * @author lei
@@ -35,7 +33,10 @@ public class ProductController {
             String value = request.getHeader(key);
             map.put(key, value);
         }
-        return Result.success("商品获取成功：当前商品Id为：" + id + "当前调用商品服务IP 端口" + ip + ":" + port, "请求头信息：" + map);
+        HashMap<String, Object> responseMap = new HashMap<>();
+        responseMap.put("请求头信息", map);
+        return Result.success("商品获取成功：当前商品Id为：" + id + "当前调用商品服务IP 端口" + ip + ":" + port,
+                responseMap);
     }
 
     @RequestMapping("/demo")
@@ -62,5 +63,9 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public Result deleteProduct(@PathVariable("id") Integer id) {
         return Result.success("商品删除成功：当前商品服务Ip 端口为" + ip + ":" + port, "当前删除商品ID为：" + id);
+    }
+    @GetMapping("/findProductByName")
+    public Result findProductByName(@RequestHeader(name = "Authorization",required = false)String token,String name) {
+        return Result.success("商品查询成功：当前商品服务Ip 端口为" + ip + ":" + port, "当前查询商品名为："+name+"当前请求头token="+token);
     }
 }

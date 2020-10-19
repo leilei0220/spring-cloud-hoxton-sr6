@@ -50,4 +50,9 @@ public class OrderController {
     public Result  editProduct(@PathVariable("id") Integer id) {
         return productFeign.deleteProduct(id);
     }
+
+    @GetMapping("/findProductByName")
+    public Result findProductByName(String name) {
+        return productFeign.findProductByName(name);
+    }
 }

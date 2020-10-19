@@ -26,4 +26,6 @@ public interface ProductFeign {
 
     @DeleteMapping("/product/{id}")
     Result deleteProduct(@PathVariable("id") Integer id);
+    @GetMapping("/product/findProductByName")
+    Result findProductByName(String name);
 }
