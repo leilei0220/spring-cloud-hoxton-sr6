@@ -4,6 +4,7 @@
 //import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
+//import reactor.core.publisher.Mono;
 //
 ///**
 // * @author lei
@@ -17,8 +18,10 @@
 //    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 //        return builder.routes()
 //                .route("easy-order", r -> r.path("/order/**")
+//                        .filters(f->f.prefixPath("/order"))
 //                        .uri("http://localhost:9002/"))
 //                .route("server-product", r -> r.path("/product/**")
+//                        .filters(f->f.prefixPath("/product"))
 //                        .uri("lb://demo-product"))
 //                .build();
 //    }

@@ -6,9 +6,9 @@ spring:
     name: app-gateway
   cloud:
     gateway:
-      default-filters:
-        - AddResponseHeader=X-Response-Default, panghu
-        - PrefixPath=/lei-app
+#      default-filters:
+#        - AddResponseHeader=X-Response-Default, panghu
+#        - PrefixPath=/lei-app
       routes:
         #简单的路由
         - id: easy-order
@@ -48,7 +48,7 @@ spring:
 #            - DedupeResponseHeader=x-response,RETAIN_FIRST
 #            - MapRequestHeader=test-header, Authorization
 #            - PrefixPath=/lei
-            - StripPrefix=1
+#            - StripPrefix=1
 #            - SetRequestHeader=X-Request-lei, gold
 #            - SetRequestHeader=X-Request-lei, zsls
 #            - SetStatus=401
@@ -56,6 +56,9 @@ spring:
 #            - RemoveRequestParameter=name
 #            - RemoveResponseHeader=x-response
       #如配置服务名路由无效时，可放开此配置
+          metadata:
+            response-timeout: 200
+            connect-timeout: 200
 
 #      discovery:
 #        locator:
