@@ -6,6 +6,26 @@ spring:
     name: app-gateway
   cloud:
     gateway:
+      httpclient:
+        #默认为毫秒单位 connect-timeout 默认为45s
+        connect-timeout: 5000
+        #点进源码可设置不同单位，我这里设置为5s
+        response-timeout: 5s
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            #是否允许cookie跨域  true允许
+            allowCredentials: true
+            #允许跨域的url * 则允许全部
+            allowedOrigins:
+              - http://192.168.124.17
+            # 允许跨域的方法 * 则全部
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+            # 跨域预检时间
+            maxAge: 180
 #      default-filters:
 #        - AddResponseHeader=X-Response-Default, panghu
 #        - PrefixPath=/lei-app
@@ -20,10 +40,13 @@ spring:
           uri: lb://demo-order
           predicates:
             - Path=/order/**
+          metadata:
+            response-timeout: 2000
+            connect-timeout: 2000
         - id: server-product
           uri: lb://demo-product
           predicates:
-            - Path=/product/**,/zs/{aa}
+            - Path=/lei-app/product/**,/zs/{aa}
 #            - After=2020-10-13T21:57:33.993+08:00[Asia/Shanghai]
 #            - Before=2020-10-13T22:12:33.993+08:00[Asia/Shanghai]
 #            - Between=2020-10-13T22:24:33.993+08:00[Asia/Shanghai],2020-10-13T22:26:33.993+08:00[Asia/Shanghai]
@@ -48,21 +71,20 @@ spring:
 #            - DedupeResponseHeader=x-response,RETAIN_FIRST
 #            - MapRequestHeader=test-header, Authorization
 #            - PrefixPath=/lei
-#            - StripPrefix=1
+            - StripPrefix=1
 #            - SetRequestHeader=X-Request-lei, gold
 #            - SetRequestHeader=X-Request-lei, zsls
 #            - SetStatus=401
 #            - RemoveRequestHeader=X-Request-lei
 #            - RemoveRequestParameter=name
 #            - RemoveResponseHeader=x-response
-      #如配置服务名路由无效时，可放开此配置
           metadata:
-            response-timeout: 200
-            connect-timeout: 200
-
-#      discovery:
-#        locator:
-#          enabled: true
+            response-timeout: 2000
+            connect-timeout: 2000
+    #如配置服务名路由无效时，可放开此配置
+      discovery:
+        locator:
+          enabled: true
 
     #开始配置consul的服务注册
     consul:
