@@ -1,0 +1,16 @@
+spring:
+  application:
+    #服务名称
+    name: demo-order
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: service-config
+      label: master
+
+server:
+  port: 9874
+student:
+  name: 张三
+

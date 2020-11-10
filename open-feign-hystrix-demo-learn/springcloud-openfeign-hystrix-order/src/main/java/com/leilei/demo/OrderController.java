@@ -1,6 +1,7 @@
 package com.leilei.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -14,6 +15,9 @@ import java.math.BigDecimal;
 @RestController
 @RequestMapping("/order")
 public class OrderController {
+    @Value("${student.name}")
+    private String name;
+
     /**
      * openfeign客户端对象 调用商品服务
      */
@@ -54,5 +58,9 @@ public class OrderController {
     @GetMapping("/findProductByName")
     public Result findProductByName(String name) {
         return productFeign.findProductByName(name);
+    }
+    @GetMapping("/testName")
+    public String testName() {
+        return name;
     }
 }
