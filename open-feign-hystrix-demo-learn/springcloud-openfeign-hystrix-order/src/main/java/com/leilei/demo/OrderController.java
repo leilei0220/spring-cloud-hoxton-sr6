@@ -2,6 +2,7 @@ package com.leilei.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
  * @desc
  */
 @RestController
+@RefreshScope
 @RequestMapping("/order")
 public class OrderController {
     @Value("${student.name}")

@@ -8,9 +8,14 @@ spring:
         enabled: true
         service-id: service-config
       label: master
-
+      fail-fast: true
 server:
   port: 9874
 student:
   name: 张三
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
